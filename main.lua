@@ -361,7 +361,7 @@ function lclhx:Inject()
 
 	StarterGui:SetCore("SendNotification", {
 		Title = string.format("LclHx Injected! [%.2fms]", (os.clock() - StartTime) * 1000),
-		Text = "Press \"F1\" to toggle the LclHx GUI.",
+		Text = "Press \"F1\" to toggle the LclHx GUI. - Made by PolyVector.",
 		Duration = 5,
 		Button1 = "Ignore",
 	})
