@@ -248,8 +248,6 @@ function lclhx:Inject()
 				if PlayerTeleportingToCharacter.HumanoidRootPart then
 					Character.HumanoidRootPart.CFrame = PlayerTeleportingToCharacter.HumanoidRootPart.CFrame
 				end
-
-				print("completed proc")
 			end
 		end
 	end)
