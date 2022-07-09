@@ -1,1 +1,1 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Poly-Vector/LclHx/master/main.lua", true))
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Poly-Vector/LclHx/master/main.lua", true))()
