@@ -154,6 +154,7 @@ function lclhx:CreateUi(): ScreenGui
 
 	local WorkspaceHeader = lclhx:CreateDefaultHeader("Workspace", BackgroundGUIContainer, "Workspace")
 	local GravityTextBox = lclhx:CreateDefaultTextBox("ChangeGravity", BackgroundGUIContainer, "Change Gravity")
+	local XrayTextBox = lclhx:CreateDefaultButton("Xray", BackgroundGUIContainer, "X-ray Toggle")
 
 	local LightingHeader = lclhx:CreateDefaultHeader("Lighting", BackgroundGUIContainer, "Lighting")
 	local FullBrightButton = lclhx:CreateDefaultButton("FullBrightToggle", BackgroundGUIContainer, "FullBright Toggle")
@@ -166,6 +167,7 @@ function lclhx:CreateUi(): ScreenGui
 
 	WorkspaceHeader.LayoutOrder = 100
 	GravityTextBox.LayoutOrder = 101
+	XrayTextBox.LayoutOrder = 102
 
 	LightingHeader.LayoutOrder = 200
 	FullBrightButton.LayoutOrder = 201
