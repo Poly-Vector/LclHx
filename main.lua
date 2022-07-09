@@ -6,7 +6,6 @@ local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 local Players = game:GetService("Players")
 local Lighting = game:GetService("Lighting")
-local TweenService = game:GetService("TweenService")
 
 local Player = Players.LocalPlayer
 
@@ -139,11 +138,12 @@ function lclhx:CreateUi(): ScreenGui
 	BackgroundGUIContainer.Position = UDim2.new(0.5, 0, 0.525, 0)
 	BackgroundGUIContainer.BackgroundTransparency = 1
 
-	local BackgroundGUIContainerList = Instance.new("UIListLayout")
-	BackgroundGUIContainerList.Parent = BackgroundGUIContainer
+	local BackgroundGUIContainerGrid = Instance.new("UIListLayout")
+	BackgroundGUIContainerGrid.Parent = BackgroundGUIContainer
 
-	BackgroundGUIContainerList.Padding = UDim.new(0.05, 0)
-	BackgroundGUIContainerList.SortOrder = Enum.SortOrder.LayoutOrder
+	BackgroundGUIContainerGrid.CellSize = UDim2.new(0.25, 0, 0.1, 0)
+	BackgroundGUIContainerGrid.Padding = Vector2.new(0.05, 0)
+	BackgroundGUIContainerGrid.FillDirection = Enum.FillDirection.Vertical
 
 	--Buttons & Headers
 	local PlayerHeader = lclhx:CreateDefaultHeader("Player",  BackgroundGUIContainer, "Player")
