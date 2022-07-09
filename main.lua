@@ -231,8 +231,6 @@ function lclhx:Inject()
 	local TeleportToPlayer = ScreenGui:WaitForChild("BackgroundGUI"):WaitForChild("BackgroundGUIContainer"):WaitForChild("TeleportToPlayer")
 
 	TeleportToPlayer.FocusLost:Connect(function()
-		print("Loaded...")
-
 		for _, PlayerTeleportingTo in ipairs(Players:GetPlayers()) do
 			if PlayerTeleportingTo.Name:sub(1, #TeleportToPlayer.Text):lower() == TeleportToPlayer.Text:lower() then
 				repeat
