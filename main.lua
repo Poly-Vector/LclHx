@@ -242,18 +242,18 @@ function lclhx:Inject()
 				if PlayerTeleportingTo then
 					if
 						PlayerTeleportingTo:FindFirstDescendant("Humanoid")
-						and PlayerTeleportingToCharacter:FindFirstDescendant("Torso")
-						and PlayerTeleportingToCharacter:FindFirstDescendant("LeftArm")
-						and PlayerTeleportingToCharacter:FindFirstDescendant("RightArm")
-						and PlayerTeleportingToCharacter:FindFirstDescendant("LeftLeg")
-						and PlayerTeleportingToCharacter:FindFirstDescendant("RightLeg")
+						and PlayerTeleportingToCharacter:FindFirstChild("Torso")
+						and PlayerTeleportingToCharacter:FindFirstChild("LeftArm")
+						and PlayerTeleportingToCharacter:FindFirstChild("RightArm")
+						and PlayerTeleportingToCharacter:FindFirstChild("LeftLeg")
+						and PlayerTeleportingToCharacter:FindFirstChild("RightLeg")
 					then
-						Character:FindFirstDescendant("HumanoidRootPart").CFrame = PlayerTeleportingToCharacter:FindFirstDescendant("HumanoidRootPart").CFrame
-						Character:FindFirstDescendant("Torso").CFrame = PlayerTeleportingToCharacter:FindFirstDescendant("Torso").CFrame
-						Character:FindFirstDescendant("LeftArm").CFrame = PlayerTeleportingToCharacter:FindFirstDescendant("LeftArm").CFrame
-						Character:FindFirstDescendant("RightArm").CFrame = PlayerTeleportingToCharacter:FindFirstDescendant("RightArm").CFrame
-						Character:FindFirstDescendant("LeftLeg").CFrame = PlayerTeleportingToCharacter:FindFirstDescendant("LeftLeg").CFrame
-						Character:FindFirstDescendant("RightLeg").CFrame = PlayerTeleportingToCharacter:FindFirstDescendant("RightLeg").CFrame
+						Character:FindFirstChild("HumanoidRootPart").CFrame = PlayerTeleportingToCharacter:FindFirstChild("HumanoidRootPart").CFrame
+						Character:FindFirstChild("Torso").CFrame = PlayerTeleportingToCharacter:FindFirstChild("Torso").CFrame
+						Character:FindFirstChild("LeftArm").CFrame = PlayerTeleportingToCharacter:FindFirstChild("LeftArm").CFrame
+						Character:FindFirstChild("RightArm").CFrame = PlayerTeleportingToCharacter:FindFirstChild("RightArm").CFrame
+						Character:FindFirstChild("LeftLeg").CFrame = PlayerTeleportingToCharacter:FindFirstChild("LeftLeg").CFrame
+						Character:FindFirstChild("RightLeg").CFrame = PlayerTeleportingToCharacter:FindFirstChild("RightLeg").CFrame
 					end
 
 				end
