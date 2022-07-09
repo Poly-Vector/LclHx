@@ -138,7 +138,7 @@ function lclhx:CreateUi(): ScreenGui
 	BackgroundGUIContainer.Position = UDim2.new(0.5, 0, 0.525, 0)
 	BackgroundGUIContainer.BackgroundTransparency = 1
 
-	local BackgroundGUIContainerGrid = Instance.new("UIListLayout")
+	local BackgroundGUIContainerGrid = Instance.new("UIGridLayout")
 	BackgroundGUIContainerGrid.Parent = BackgroundGUIContainer
 
 	BackgroundGUIContainerGrid.CellSize = UDim2.new(0.25, 0, 0.1, 0)
