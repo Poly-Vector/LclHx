@@ -144,6 +144,7 @@ function lclhx:CreateUi(): ScreenGui
 	BackgroundGUIContainerGrid.CellSize = UDim2.new(0.25, 0, 0.1, 0)
 	BackgroundGUIContainerGrid.CellPadding = UDim2.new(0.05, 0, 0.05, 0)
 	BackgroundGUIContainerGrid.FillDirection = Enum.FillDirection.Vertical
+	BackgroundGUIContainerGrid.SortOrder = Enum.SortOrder.LayoutOrder
 
 	--Buttons & Headers
 	local PlayerHeader = lclhx:CreateDefaultHeader("Player",  BackgroundGUIContainer, "Player")
