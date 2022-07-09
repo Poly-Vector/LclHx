@@ -12,6 +12,29 @@ local Lighting = game:GetService("Lighting")
 local DraggableObject = loadstring(game:HttpGet("https://pastebin.com/raw/4CMfWXRi", true))()
 ----------------------------------------------------------------------
 
+function lclhx:CreateDefaultButton(Name: string, Parent: Instance, Text: string): TextButton
+	local Button = Instance.new("TextButton")
+	Button.Parent = Parent
+	Button.Name = Name
+	Button.Text = Text
+
+	Button.AnchorPoint = Vector2.new(0.5, 0.5)
+	Button.Size = UDim2.new(0.25, 0, 0.1, 0)
+	Button.BackgroundColor3 = Color3.fromRGB(46, 46, 46)
+	Button.BorderSizePixel = 0
+	Button.Font = Enum.Font.RobotoMono
+	Button.TextSize = 14
+	Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+	local ButtonUIStroke = Instance.new("UIStroke")
+	ButtonUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	ButtonUIStroke.Thickness = 1.5
+	ButtonUIStroke.Parent = Button
+	ButtonUIStroke.Color = Color3.fromRGB(48, 48, 48)
+
+	return Button
+end
+
 function lclhx:CreateDefaultTextBox(Name: string, Parent: Instance, PlaceholderText: string): TextBox
 	local TextBox = Instance.new("TextBox")
 	TextBox.Parent = Parent
@@ -50,29 +73,6 @@ function lclhx:CreateDefaultHeader(Name: string, Parent: Instance, Text: string)
 	Header.TextSize = 16
 
 	return Header
-end
-
-function lclhx:CreateDefaultButton(Name: string, Parent: Instance, Text: string): TextButton
-	local Button = Instance.new("TextButton")
-	Button.Parent = Parent
-	Button.Name = Name
-	Button.Text = Text
-
-	Button.AnchorPoint = Vector2.new(0.5, 0.5)
-	Button.Size = UDim2.new(0.25, 0, 0.1, 0)
-	Button.BackgroundColor3 = Color3.fromRGB(46, 46, 46)
-	Button.BorderSizePixel = 0
-	Button.Font = Enum.Font.RobotoMono
-	Button.TextSize = 14
-	Button.TextColor3 = Color3.fromRGB(255, 255, 255)
-
-	local ButtonUIStroke = Instance.new("UIStroke")
-	ButtonUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	ButtonUIStroke.Thickness = 1.5
-	ButtonUIStroke.Parent = Button
-	ButtonUIStroke.Color = Color3.fromRGB(48, 48, 48)
-
-	return Button
 end
 
 function lclhx:CreateUi(): ScreenGui
@@ -147,7 +147,7 @@ function lclhx:CreateUi(): ScreenGui
 	local PlayerHeader = lclhx:CreateDefaultHeader("Player",  BackgroundGUIContainer, "Player")
 	local WalkSpeedTextBox = lclhx:CreateDefaultTextBox("ChangeWalkSpeed", BackgroundGUIContainer, "Change WalkSpeed")
 	local JumpPowerTextBox = lclhx:CreateDefaultTextBox("ChangeJumpPower", BackgroundGUIContainer, "Change JumpPower")
-	local TeleportToPlayerTextBox = lclhx:CreateDefaultTextBox("TeleportToPlayer", BackgroundGUIContainer, "Teleport To Player (Partial Name)")
+	local TeleportToPlayerTextBox = lclhx:CreateDefaultTextBox("TeleportToPlayer", BackgroundGUIContainer, "Teleport To Player")
 
 	local WorkspaceHeader = lclhx:CreateDefaultHeader("Workspace", BackgroundGUIContainer, "Workspace")
 	local GravityTextBox = lclhx:CreateDefaultTextBox("ChangeGravity", BackgroundGUIContainer, "Change Gravity")
@@ -231,8 +231,10 @@ function lclhx:Inject()
 	local TeleportToPlayer = ScreenGui:WaitForChild("BackgroundGUI"):WaitForChild("BackgroundGUIContainer"):WaitForChild("TeleportToPlayer")
 
 	TeleportToPlayer.FocusLost:Connect(function()
+		print("Loaded...")
+
 		for _, PlayerTeleportingTo in ipairs(Players:GetPlayers()) do
-			if PlayerTeleportingTo.Name:sub(1, #TeleportToPlayer.Text) == TeleportToPlayer.Text then
+			if PlayerTeleportingTo.Name:sub(1, #TeleportToPlayer.Text):lower() == TeleportToPlayer.Text:lower() then
 				repeat
 					task.wait()
 				until PlayerTeleportingTo.Character
@@ -240,10 +242,22 @@ function lclhx:Inject()
 				local PlayerTeleportingToCharacter = PlayerTeleportingTo.Character
 
 				if PlayerTeleportingTo then
-					local PlayerTeleportingTHumanoidRootPart = PlayerTeleportingToCharacter:FindFirstChild("HumanoidRootPart")
-					local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
+					if
+						PlayerTeleportingTo:FindFirstDescendant("Humanoid")
+						and PlayerTeleportingToCharacter:FindFirstDescendant("Torso")
+						and PlayerTeleportingToCharacter:FindFirstDescendant("LeftArm")
+						and PlayerTeleportingToCharacter:FindFirstDescendant("RightArm")
+						and PlayerTeleportingToCharacter:FindFirstDescendant("LeftLeg")
+						and PlayerTeleportingToCharacter:FindFirstDescendant("RightLeg")
+					then
+						Character:FindFirstDescendant("HumanoidRootPart").CFrame = PlayerTeleportingToCharacter:FindFirstDescendant("HumanoidRootPart").CFrame
+						Character:FindFirstDescendant("Torso").CFrame = PlayerTeleportingToCharacter:FindFirstDescendant("Torso").CFrame
+						Character:FindFirstDescendant("LeftArm").CFrame = PlayerTeleportingToCharacter:FindFirstDescendant("LeftArm").CFrame
+						Character:FindFirstDescendant("RightArm").CFrame = PlayerTeleportingToCharacter:FindFirstDescendant("RightArm").CFrame
+						Character:FindFirstDescendant("LeftLeg").CFrame = PlayerTeleportingToCharacter:FindFirstDescendant("LeftLeg").CFrame
+						Character:FindFirstDescendant("RightLeg").CFrame = PlayerTeleportingToCharacter:FindFirstDescendant("RightLeg").CFrame
+					end
 
-					HumanoidRootPart.Position = PlayerTeleportingTHumanoidRootPart.Position
 				end
 			end
 		end
