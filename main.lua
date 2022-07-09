@@ -147,6 +147,7 @@ function lclhx:CreateUi(): ScreenGui
 	local PlayerHeader = lclhx:CreateDefaultHeader("Player",  BackgroundGUIContainer, "Player")
 	local WalkSpeedTextBox = lclhx:CreateDefaultTextBox("ChangeWalkSpeed", BackgroundGUIContainer, "Change WalkSpeed")
 	local JumpPowerTextBox = lclhx:CreateDefaultTextBox("ChangeJumpPower", BackgroundGUIContainer, "Change JumpPower")
+	local TeleportToPlayerTextBox = lclhx:CreateDefaultTextBox("TeleportToPlayer", BackgroundGUIContainer, "Teleport To Player (Partial Name)")
 
 	local WorkspaceHeader = lclhx:CreateDefaultHeader("Workspace", BackgroundGUIContainer, "Workspace")
 	local GravityTextBox = lclhx:CreateDefaultTextBox("ChangeGravity", BackgroundGUIContainer, "Change Gravity")
@@ -158,6 +159,7 @@ function lclhx:CreateUi(): ScreenGui
 	PlayerHeader.LayoutOrder = 000
 	WalkSpeedTextBox.LayoutOrder = 001
 	JumpPowerTextBox.LayoutOrder = 002
+	TeleportToPlayerTextBox.LayoutOrder = 003
 
 	WorkspaceHeader.LayoutOrder = 100
 	GravityTextBox.LayoutOrder = 101
@@ -222,6 +224,28 @@ function lclhx:Inject()
 			Humanoid.JumpPower = 50
 		else
 			Humanoid.JumpPower = NewJumpPowerValue
+		end
+	end)
+
+	--Teleport To Player
+	local TeleportToPlayer = ScreenGui:WaitForChild("BackgroundGUI"):WaitForChild("BackgroundGUIContainer"):WaitForChild("TeleportToPlayer")
+
+	TeleportToPlayer.FocusLost:Connect(function()
+		for _, PlayerTeleportingTo in ipairs(Players:GetPlayers()) do
+			if PlayerTeleportingTo.Name:sub(1, #TeleportToPlayer.Text) == TeleportToPlayer.Text then
+				repeat
+					task.wait()
+				until PlayerTeleportingTo.Character
+
+				local PlayerTeleportingToCharacter = PlayerTeleportingTo.Character
+
+				if PlayerTeleportingTo then
+					local PlayerTeleportingTHumanoidRootPart = PlayerTeleportingToCharacter:FindFirstChild("HumanoidRootPart")
+					local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
+
+					HumanoidRootPart.Position = PlayerTeleportingTHumanoidRootPart.Position
+				end
+			end
 		end
 	end)
 
