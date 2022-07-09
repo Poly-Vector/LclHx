@@ -142,7 +142,7 @@ function lclhx:CreateUi(): ScreenGui
 	BackgroundGUIContainerGrid.Parent = BackgroundGUIContainer
 
 	BackgroundGUIContainerGrid.CellSize = UDim2.new(0.25, 0, 0.1, 0)
-	BackgroundGUIContainerGrid.CellPadding = Vector2.new(0.05, 0)
+	BackgroundGUIContainerGrid.CellPadding = UDim2.new(0.05, 0, 0.05, 0)
 	BackgroundGUIContainerGrid.FillDirection = Enum.FillDirection.Vertical
 
 	--Buttons & Headers
