@@ -5,8 +5,10 @@ local StarterGui = game:GetService("StarterGui")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 local Players = game:GetService("Players")
-local Player = Players.LocalPlayer
 local Lighting = game:GetService("Lighting")
+local TweenService = game:GetService("TweenService")
+
+local Player = Players.LocalPlayer
 
 --Credit to @SpyNaz on Roblox for this module, it really helped me out.
 local DraggableObject = loadstring(game:HttpGet("https://pastebin.com/raw/4CMfWXRi", true))()
@@ -232,31 +234,22 @@ function lclhx:Inject()
 
 	TeleportToPlayer.FocusLost:Connect(function()
 		for _, PlayerTeleportingTo in ipairs(Players:GetPlayers()) do
-			if PlayerTeleportingTo.Name:sub(1, #TeleportToPlayer.Text):lower() == TeleportToPlayer.Text:lower() then
+			if
+				PlayerTeleportingTo.Name:sub(1, #TeleportToPlayer.Text):lower() == TeleportToPlayer.Text:lower()
+				or PlayerTeleportingTo.DisplayName:sub(1, #TeleportToPlayer.Text):lower() == TeleportToPlayer.Text:lower()
+				and TeleportToPlayer.Text ~= "" then
+				
 				repeat
 					task.wait()
 				until PlayerTeleportingTo.Character
 
 				local PlayerTeleportingToCharacter = PlayerTeleportingTo.Character
 
-				if PlayerTeleportingTo then
-					if
-						PlayerTeleportingTo:FindFirstDescendant("Humanoid")
-						and PlayerTeleportingToCharacter:FindFirstChild("Torso")
-						and PlayerTeleportingToCharacter:FindFirstChild("LeftArm")
-						and PlayerTeleportingToCharacter:FindFirstChild("RightArm")
-						and PlayerTeleportingToCharacter:FindFirstChild("LeftLeg")
-						and PlayerTeleportingToCharacter:FindFirstChild("RightLeg")
-					then
-						Character:FindFirstChild("HumanoidRootPart").CFrame = PlayerTeleportingToCharacter:FindFirstChild("HumanoidRootPart").CFrame
-						Character:FindFirstChild("Torso").CFrame = PlayerTeleportingToCharacter:FindFirstChild("Torso").CFrame
-						Character:FindFirstChild("LeftArm").CFrame = PlayerTeleportingToCharacter:FindFirstChild("LeftArm").CFrame
-						Character:FindFirstChild("RightArm").CFrame = PlayerTeleportingToCharacter:FindFirstChild("RightArm").CFrame
-						Character:FindFirstChild("LeftLeg").CFrame = PlayerTeleportingToCharacter:FindFirstChild("LeftLeg").CFrame
-						Character:FindFirstChild("RightLeg").CFrame = PlayerTeleportingToCharacter:FindFirstChild("RightLeg").CFrame
-					end
-
+				if PlayerTeleportingToCharacter.HumanoidRootPart then
+					Character.HumanoidRootPart.CFrame = PlayerTeleportingToCharacter.HumanoidRootPart.CFrame
 				end
+
+				print("completed proc")
 			end
 		end
 	end)
