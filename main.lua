@@ -195,7 +195,7 @@ function lclhx:Inject()
 			return
 		end
 
-		if Input.KeyCode == Enum.KeyCode.F1 then
+		if Input.KeyCode == Enum.KeyCode.RightShift then
 			ToggleUIValue = not ToggleUIValue
 
 			if ToggleUIValue == true then
@@ -240,9 +240,13 @@ function lclhx:Inject()
 			if
 				PlayerTeleportingTo.Name:sub(1, #TeleportToPlayer.Text):lower() == TeleportToPlayer.Text:lower()
 				or PlayerTeleportingTo.DisplayName:sub(1, #TeleportToPlayer.Text):lower() == TeleportToPlayer.Text:lower()
-				and TeleportToPlayer.Text ~= ""
-				and TeleportToPlayer.Text ~= nil then
-				
+			then
+				if TeleportToPlayer.Text == nil or TeleportToPlayer.Text == "" then
+					return
+				end
+
+				print("Teleporting to " .. PlayerTeleportingTo.Name)
+
 				repeat
 					task.wait()
 				until PlayerTeleportingTo.Character
@@ -392,7 +396,7 @@ function lclhx:Inject()
 
 	StarterGui:SetCore("SendNotification", {
 		Title = string.format("LclHx Injected! [%.2fms]", (os.clock() - StartTime) * 1000),
-		Text = "Press \"F1\" to toggle the LclHx GUI.\nMade by PolyVector.",
+		Text = "Press \"RightShift\" to toggle the LclHx GUI.\nMade by PolyVector.",
 		Duration = 5,
 		Button1 = "Ignore",
 	})
