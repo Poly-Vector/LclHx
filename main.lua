@@ -195,7 +195,7 @@ function lclhx:Inject()
 			return
 		end
 
-		if Input.KeyCode == Enum.KeyCode.RightShift then
+		if Input.KeyCode == Enum.KeyCode.RightControl then
 			ToggleUIValue = not ToggleUIValue
 
 			if ToggleUIValue == true then
@@ -436,7 +436,7 @@ function lclhx:Inject()
 
 	StarterGui:SetCore("SendNotification", {
 		Title = string.format("LclHx Injected! [%.2fms]", (os.clock() - StartTime) * 1000),
-		Text = "Press \"RightShift\" to toggle the LclHx GUI.\nMade by PolyVector.",
+		Text = "Press \"RightControl\" to toggle the LclHx GUI.\n\nMade by PolyVector.",
 		Duration = 5,
 		Button1 = "Ignore",
 	})
