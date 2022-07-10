@@ -344,8 +344,8 @@ function lclhx:Inject()
 			end
 		else
 			for HighlightIndex, Highlight in ipairs(ChamsTable) do
-				table.remove(ChamsTable, HighlightIndex)
 				Highlight:Destroy()
+				table.remove(ChamsTable, HighlightIndex)
 			end
 		end
 	end)
