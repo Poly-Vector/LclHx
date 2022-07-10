@@ -240,7 +240,8 @@ function lclhx:Inject()
 			if
 				PlayerTeleportingTo.Name:sub(1, #TeleportToPlayer.Text):lower() == TeleportToPlayer.Text:lower()
 				or PlayerTeleportingTo.DisplayName:sub(1, #TeleportToPlayer.Text):lower() == TeleportToPlayer.Text:lower()
-				and TeleportToPlayer.Text ~= "" then
+				and TeleportToPlayer.Text ~= ""
+				and TeleportToPlayer.Text ~= nil then
 				
 				repeat
 					task.wait()
