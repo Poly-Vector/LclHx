@@ -245,8 +245,6 @@ function lclhx:Inject()
 					return
 				end
 
-				print("Teleporting to " .. PlayerTeleportingTo.Name)
-
 				repeat
 					task.wait()
 				until PlayerTeleportingTo.Character
@@ -270,6 +268,48 @@ function lclhx:Inject()
 			workspace.Gravity = 196.2
 		else
 			workspace.Gravity = NewGravityValue
+		end
+	end)
+
+	--Xray
+	local function GetWorkspacePartTransparency(): table
+		local PartTransparency = {}
+
+		for _, Part in ipairs(workspace:GetDescendants()) do
+			if Part:IsA("BasePart") or Part:IsA("MeshPart") then
+				PartTransparency[Part] = Part.Transparency
+			end
+		end
+
+		return PartTransparency
+	end
+
+	local DefaultTransparencySettings = GetWorkspacePartTransparency()
+	local XrayTransparencySetting = 0.5
+
+	local XrayToggleValue = false
+	local Xray = ScreenGui:WaitForChild("BackgroundGUI"):WaitForChild("BackgroundGUIContainer"):WaitForChild("Xray")
+
+	workspace.ChildAdded:Connect(function(Child: Instance)
+		if Child:IsA("BasePart") or Child:IsA("MeshPart") then
+			DefaultTransparencySettings[Child] = Child.Transparency
+			Child.Transparency = XrayTransparencySetting
+		end
+	end)
+
+	Xray.MouseButton1Click:Connect(function()
+		XrayToggleValue = not XrayToggleValue
+
+		if XrayToggleValue == true then
+			for Part, _ in pairs(DefaultTransparencySettings) do
+				Part.Transparency = XrayTransparencySetting
+			end
+		else
+			for Part, _ in pairs(DefaultTransparencySettings) do
+				if DefaultTransparencySettings[Part] then
+					Part.Transparency = DefaultTransparencySettings[Part]
+				end
+			end
 		end
 	end)
 
