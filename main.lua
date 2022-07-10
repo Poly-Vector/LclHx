@@ -155,6 +155,7 @@ function lclhx:CreateUi(): ScreenGui
 	local WorkspaceHeader = lclhx:CreateDefaultHeader("Workspace", BackgroundGUIContainer, "Workspace")
 	local GravityTextBox = lclhx:CreateDefaultTextBox("ChangeGravity", BackgroundGUIContainer, "Change Gravity")
 	local XrayTextBox = lclhx:CreateDefaultButton("Xray", BackgroundGUIContainer, "X-ray Toggle")
+	local ChamsTextBox = lclhx:CreateDefaultButton("Chams", BackgroundGUIContainer, "Chams Toggle")
 
 	local LightingHeader = lclhx:CreateDefaultHeader("Lighting", BackgroundGUIContainer, "Lighting")
 	local FullBrightButton = lclhx:CreateDefaultButton("FullBrightToggle", BackgroundGUIContainer, "FullBright Toggle")
@@ -168,6 +169,7 @@ function lclhx:CreateUi(): ScreenGui
 	WorkspaceHeader.LayoutOrder = 100
 	GravityTextBox.LayoutOrder = 101
 	XrayTextBox.LayoutOrder = 102
+	ChamsTextBox.LayoutOrder = 103
 
 	LightingHeader.LayoutOrder = 200
 	FullBrightButton.LayoutOrder = 201
@@ -309,6 +311,41 @@ function lclhx:Inject()
 				if DefaultTransparencySettings[Part] then
 					Part.Transparency = DefaultTransparencySettings[Part]
 				end
+			end
+		end
+	end)
+
+	--Chams
+	local ChamsTable = {}
+
+	local ChamsToggleValue = false
+	local Chams = ScreenGui:WaitForChild("BackgroundGUI"):WaitForChild("BackgroundGUIContainer"):WaitForChild("Chams")
+
+	Chams.MouseButton1Click:Connect(function()
+		ChamsToggleValue = not ChamsToggleValue
+
+		if ChamsToggleValue == true then
+			for _, Player in ipairs(Players:GetPlayers()) do
+				repeat
+					task.wait()
+				until Player.Character
+
+				local ChamsCharacter = Player.Character
+
+				if ChamsCharacter ~= Character then
+					local Highlight = Instance.new("Highlight")
+					Highlight.Parent = ChamsCharacter
+
+					Highlight.FillTransparency = 0
+					Highlight.FillColor = Color3.fromRGB(0, 255, 0)
+
+					table.insert(ChamsTable, Highlight)
+				end
+			end
+		else
+			for HighlightIndex, Highlight in ipairs(ChamsTable) do
+				table.remove(ChamsTable, HighlightIndex)
+				Highlight:Destroy()
 			end
 		end
 	end)
