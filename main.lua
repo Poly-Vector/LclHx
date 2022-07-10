@@ -290,7 +290,7 @@ function lclhx:Inject()
 	local XrayToggleValue = false
 	local Xray = ScreenGui:WaitForChild("BackgroundGUI"):WaitForChild("BackgroundGUIContainer"):WaitForChild("Xray")
 
-	workspace.ChildAdded:Connect(function(Child: Instance)
+	workspace.DescendantAdded:Connect(function(Child: Instance)
 		if Child:IsA("BasePart") or Child:IsA("MeshPart") then
 			DefaultTransparencySettings[Child] = Child.Transparency
 			Child.Transparency = XrayTransparencySetting
