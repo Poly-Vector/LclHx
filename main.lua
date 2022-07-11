@@ -325,27 +325,28 @@ function lclhx:Inject()
 		ChamsToggleValue = not ChamsToggleValue
 
 		if ChamsToggleValue == true then
-			for _, Player in ipairs(Players:GetPlayers()) do
+			for _, ChamsPlayer in ipairs(Players:GetPlayers()) do
 				repeat
 					task.wait()
 				until Player.Character
 
-				local ChamsCharacter = Player.Character
+				local ChamsCharacter = ChamsPlayer.Character
 
-				if ChamsCharacter ~= Character then
+				if ChamsCharacter and ChamsCharacter ~= Character then
 					local Highlight = Instance.new("Highlight")
 					Highlight.Parent = ChamsCharacter
 
-					Highlight.FillTransparency = 0
 					Highlight.FillColor = Color3.fromRGB(0, 255, 0)
+					Highlight.FillTransparency = 0
+					Highlight.OutlineTransparency = 0
 
 					table.insert(ChamsTable, Highlight)
 				end
 			end
 		else
-			for HighlightIndex, Highlight in ipairs(ChamsTable) do
+			for _, Highlight in ipairs(ChamsTable) do
+				table.remove(ChamsTable, Highlight)
 				Highlight:Destroy()
-				table.remove(ChamsTable, HighlightIndex)
 			end
 		end
 	end)
