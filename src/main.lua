@@ -2,7 +2,7 @@ local StarterGui = game:GetService("StarterGui")
 local LclHx = {}
 LclHx.__index = LclHx
 
-local LclHx_UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/LclHx/LclHx-UI/master/src/ui-lib.lua"))()
+local LclHx_UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Poly-Vector/LclHx/master/src/ui-lib.lua"))()
 
 local function CreateUi()
 	local PlayerGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
