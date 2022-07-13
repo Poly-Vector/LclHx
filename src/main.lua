@@ -8,7 +8,9 @@ local function CreateUi()
 	local PlayerGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
 
 	local Window = Instance.new("ScreenGui", PlayerGui)
-	local UI = LclHx_UI.CreateTitleWindow("LclHx", Window, UDim2.new(0, 300, 0, 50), UDim2.new(0, 0, 0, 0), UDim2.new(0, 0, 0, 0))
+	local UI = LclHx_UI.CreateTitleWindow("LclHx", Window, UDim2.new(0.5, 0, 0.5, 0), UDim2.new(0.5, 0, 0.5, 0))
 end
+
+CreateUi()
 
 return LclHx

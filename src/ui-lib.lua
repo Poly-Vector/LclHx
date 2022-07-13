@@ -5,14 +5,20 @@ local StarterGui = game:GetService("StarterGui")
 local PlayerGui = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
 
 
-function LclHx_UI.CreateTitleWindow(Title: string, Parent: Instance,  Size: UDim2, Position, UDim2)
+function LclHx_UI.CreateTitleWindow(
+    Title: string,
+    Parent: Instance,
+    Size: UDim2,
+    Position: UDim2
+)
+
     local Frame = Instance.new("Frame")
     Frame.Parent = Parent
     Frame.Name = "WindowFrame"
 
     Frame.Size = Size
     Frame.Position = Position
-    Frame.AnchorPoint = UDim2(0.5, 0, 0.5, 0)
+    Frame.AnchorPoint = Vector2.new(0.5, 0.5)
     Frame.BorderSizePixel = 1.5
 
     Frame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
